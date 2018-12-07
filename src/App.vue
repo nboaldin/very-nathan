@@ -10,6 +10,7 @@
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 
+
 export default {
   components: {
     Navbar,
@@ -51,10 +52,17 @@ $colors: (
     "twitter": ($twitter, $twitter-invert)
 );
 
+//Navbar
+$navbar-height: 5rem;
+$navbar-item-img-max-height: 3.5rem;
+$navbar-item-hover-background-color: $tertiary;
+$navbar-item-color: $secondary;
+$navbar-item-hover-color: $white;
+
 // Links
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
+$link: $secondary;
+$link-invert: $secondary-invert;
+$link-focus-border: $secondary;
 
 //Fonts
 $family-primary: 'Space Mono', monospace;

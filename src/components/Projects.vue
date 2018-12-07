@@ -10,7 +10,7 @@
         <div class="media">
           <div class="media-content">
             <p class="title is-4">{{project.title.rendered}}</p>
-            <p class="subtitle is-6">{{author}}</p>
+            <p class="subtitle is-6"></p>
           </div>
         </div>
 
@@ -32,7 +32,8 @@ export default {
   name: 'Projects',
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      isFullPage: false
     }
   },
   created () {

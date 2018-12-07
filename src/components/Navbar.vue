@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="#">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      <img src="https://verynathan.com/verynathan/wp-content/uploads/2018/12/very-nathan-logo7-e1544213923376.png">
     </a>
 
     <a @click="toggleMenu" role="button" v-bind:class="{'is-active': isActive}" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -11,7 +11,6 @@
       <span aria-hidden="true"></span>
     </a>
   </div>
-
   <div id="navbarBasicExample" v-bind:class="{'is-active': isActive}" class="navbar-menu">
     <div class="navbar-start">
       <router-link class="navbar-item" to="/">Home</router-link>
@@ -22,7 +21,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <a class="button is-secondary">
             <strong>Sign up</strong>
           </a>
           <a class="button is-light">
@@ -52,5 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 
 </style>

@@ -36,7 +36,9 @@ export default {
   name: 'PostSummary',
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      isFullPage: false
+
     }
   },
   created () {
