@@ -1,6 +1,6 @@
 <template>
   <b-notification :closable="false">
-    <div v-for="project in $store.state.projects" :key="project.id" class="card">
+    <div v-for="project in $store.state.projects" :key="project.id" class="card is-flex">
       <div class="card-image">
         <figure class="image is-4x3">
           <img :src="project.project_image.url" alt="project image">
@@ -8,7 +8,7 @@
       </div>
       <div class="card-content">
         <div class="media">
-          <div class="media-content">
+          <div class="media-content is-flex">
             <p class="title is-4">{{project.title.rendered}}</p>
             <p class="subtitle is-6"></p>
           </div>
@@ -32,12 +32,10 @@ export default {
   name: 'Projects',
   data() {
     return {
-      isLoading: true,
       isFullPage: false
     }
   },
   created () {
-    this.$store.dispatch('setProjects').then(this.isLoading = false);
   },
   methods: { 
   }
@@ -45,19 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  /deep/ {
-    .media-content {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .notification {
-      padding: 1.25rem 1.5rem;
-    }
-  }
-  .card { 
-    width: 45%;
-    margin: 2%;
-  }
+  
 
 </style>
 

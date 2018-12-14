@@ -1,21 +1,21 @@
 <template>
   <section>
-    <form v-on:submit.prevent="submitForm">  
+    <form v-on:submit.prevent="sendForm">  
       <b-field label="Name">
-          <b-input v-model="name"></b-input>
+          <b-input v-model="form.name"></b-input>
       </b-field>
 
       <b-field label="Email">
           <b-input type="email"
               maxlength="30"
-              v-model="email">
+              v-model="form.email">
           </b-input>
       </b-field>
 
       <b-field label="Message">
           <b-input maxlength="200" 
             type="textarea"
-            v-model="message"></b-input>
+            v-model="form.message"></b-input>
       </b-field>
 
       <b-field label=""><!-- Label left empty for spacing -->
@@ -34,50 +34,54 @@ export default {
   name: 'ContactForm',
   data() {
     return {
-      error: null,
-      name: null,
-      email: null,
-      message: null,
+      errors: [],
+      form: {
+        name: '',
+        email: '',
+        message: ''
+      }, 
+      url: 'https://verynathan.com/verynathan/wp-json/wp/v2/contact',
+      sendFormResponse: ''
     }
   },
   methods: {
     showToast: function () {
       const toastOptions = {
         duration: 5000,
-        message: this.error,
+        message: this.errors,
         position: 'is-bottom',
         type: 'is-secondary'
       }
 
-      if(this.error) {
+      if(this.errors) {
       this.$toast.open(toastOptions);
       }
-      
-      this.error = null;
+      this.errors = [];
     },
-    submitForm: function() {
+    sendForm: function() {
+      this.axios.post(this.url, this.form)
+        .then((response) => {
+          this.form.name = '';
+          this.form.email = '';
+          this.form.message = '';
+          this.sendFormResponse = response.data;
 
-      if (this.name && this.email && this.message) {
-        return true;
-      }
+          const toastOptions = {
+            duration: 5000,
+            message: this.sendFormResponse,
+            position: 'is-bottom',
+            type: 'is-primary'
+          }
 
-      if (!this.name) {
-        this.error = 'Name required.';
-      }
-      if (!this.email) {
-        this.error = 'Email required.';
-      }
-      if (!this.message) {
-        this.error = 'Message required.';
-      }
-
-      this.showToast();
-
-      // this.errors = [];
-      // this.name = null;
-      // this.email = null;
-      // this.message = null;
-
+          this.$toast.open(toastOptions);
+          this.sendFormResponse = '';
+        
+        })
+        .catch((error) => {
+          this.errors = error.response.data.message;
+          console.log(this.errors);
+          this.showToast();
+        });
     }
   }
 }
