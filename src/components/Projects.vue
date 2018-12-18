@@ -1,6 +1,6 @@
 <template>
   <b-notification :closable="false">
-    <div v-for="project in $store.state.projects" :key="project.id" class="card is-flex">
+    <div v-for="project in projects" :key="project.id" class="card is-flex">
       <div class="card-image">
         <figure class="image is-4x3">
           <img :src="project.project_image.url" alt="project image">
@@ -28,16 +28,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Projects',
   data() {
     return {
-      isFullPage: false
+      isFullPage: false,
     }
   },
-  created () {
-  },
   methods: { 
+  },
+  computed: {
+    ...mapState ([
+      'isLoading',
+      'projects'
+    ])
   }
 }
 </script>

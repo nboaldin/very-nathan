@@ -5,37 +5,52 @@ import axios from 'axios'
 Vue.use(axios)
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   strict: true,
   state: {
     projects: null,
-    posts: null
+    posts: null,
+    isLoading: false,
+    baseUrl: 'https://verynathan.com/verynathan/wp-json/wp/v2/'
   },
   getters: {
-
+    
   },
   mutations: {
-    setProjects (state, payload) {
+    SET_PROJECTS (state, payload) {
       state.projects = payload;
     },
-    setPosts (state, payload) {
+    SET_POSTS (state, payload) {
       state.posts = payload;
+    },
+    IS_LOADING (state, payload) {
+      state.isLoading = payload;
     }
   },
   actions: {
-    setProjects (context) {
-      let uri = 'https://verynathan.com/verynathan/wp-json/wp/v2/projects';
+    setProjects ({ commit, state }) {
+      let uri = `${state.baseUrl}projects`;
+
+      commit('IS_LOADING', true);
 
       axios.get(uri).then((response) => {
-        context.commit('setProjects', response.data);
-      }).finally(this.isLoading = false);
+        commit('SET_PROJECTS', response.data);
+      }).finally(commit('IS_LOADING', false));
     },
-    setPosts (context) {
-      let uri = 'https://verynathan.com/verynathan/wp-json/wp/v2/posts?per_page=100';
-      
+    setPosts ({ commit, state }) {
+      let uri = `${state.baseUrl}posts?per_page=100`;
+
+      commit('IS_LOADING', true);
+
       axios.get(uri).then((response) => {
-        context.commit('setPosts', response.data);
-      }).finally(this.isLoading = false);
-      }
+        commit('SET_POSTS', response.data);
+      }).finally(commit('IS_LOADING', false));
     }
-  })
+  }
+})
+
+store.dispatch('setProjects');
+store.dispatch('setPosts');
+
+
+export default store

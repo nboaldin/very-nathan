@@ -1,6 +1,6 @@
 <template>
   <b-notification :closable="false" class="container">
-    <article v-for="post in $store.state.posts" :key="post.id" class="has-background-light media">
+    <article v-for="post in posts" :key="post.id" class="has-background-light media">
         <figure v-if="post.featured_image_url"  class="media-left">
           <p class="image is-300x300">
             <img :src="post.featured_image_url" >
@@ -32,35 +32,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'PostSummary',
   data() {
     return {
-      isLoading: true,
       isFullPage: false
 
     }
   },
-  created () {
-    this.$store.dispatch('setPosts').then(this.isLoading = false);
-  },
   methods: {
-    // getPosts: function () {
-    //   let uri = 'https://verynathan.com/verynathan/wp-json/wp/v2/posts?per_page=100';
-
-    //   this.axios.interceptors.request.use((config) => {
-    //     this.isLoading = true;
-    //     return config;
-    //   });
-
-    //   this.axios.get(uri).then((response) => {
-    //     this.posts = response.data;
-    //     this.isLoading = false;
-    //   });
-    // }
+    
   },
   computed: {
-    
+    ...mapState([
+      'isLoading',
+      'posts'
+    ])
   }
 }
 </script>

@@ -1,32 +1,39 @@
 <template>
-  <section>
-    <form v-on:submit.prevent="sendForm">  
-      <b-field label="Name">
-          <b-input v-model="form.name"></b-input>
-      </b-field>
+  <div class="columns">
+    <div class="column">
+      <form v-on:submit.prevent="sendForm">  
+        <b-field label="Name">
+            <b-input v-model="form.name"></b-input>
+        </b-field>
 
-      <b-field label="Email">
-          <b-input type="email"
-              maxlength="30"
-              v-model="form.email">
-          </b-input>
-      </b-field>
+        <b-field label="Email">
+            <b-input type="email"
+                maxlength="30"
+                v-model="form.email">
+            </b-input>
+        </b-field>
 
-      <b-field label="Message">
-          <b-input maxlength="200" 
-            type="textarea"
-            v-model="form.message"></b-input>
-      </b-field>
+        <b-field label="Message">
+            <b-input maxlength="200" 
+              type="textarea"
+              v-model="form.message"></b-input>
+        </b-field>
 
-      <b-field label=""><!-- Label left empty for spacing -->
-        <p class="control">
-          <button type="submit" class="button is-secondary">
-            Send message
-          </button>
-        </p>
-      </b-field>
-    </form>
-  </section>
+        <b-field label=""><!-- Label left empty for spacing -->
+          <p class="control">
+            <button type="submit" class="button is-secondary">
+              Send message
+            </button>
+          </p>
+        </b-field>
+      </form>
+    </div>
+    <div class="column">
+      Social Links
+      email
+      etc
+    </div>
+  </div>
 </template>
 
 <script>
@@ -79,7 +86,6 @@ export default {
         })
         .catch((error) => {
           this.errors = error.response.data.message;
-          console.log(this.errors);
           this.showToast();
         });
     }
@@ -88,5 +94,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+form {
+  padding: 1rem;
+}
 
 </style>
