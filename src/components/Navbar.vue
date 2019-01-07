@@ -13,9 +13,9 @@
   </div>
   <div id="navbarBasicExample" v-bind:class="{'is-active': isActive}" class="navbar-menu">
     <div class="navbar-start">
-      <router-link class="navbar-item" to="/">Home</router-link>
-      <router-link class="navbar-item" to="/about">About</router-link>
-      <router-link class="navbar-item" to="/contact">Contact</router-link>
+      <router-link @click.native="animate" ref="home" :class="{'animated bounce' : animated}" class="navbar-item" to="/">Home</router-link>
+      <router-link @click.native="animate" ref="about" :class="{'animated bounce' : animated}" class="navbar-item" to="/about">About</router-link>
+      <router-link @click.native="animate" ref="contact" :class="{'animated bounce' : animated}" class="navbar-item" to="/contact">Contact</router-link>
     </div>
 
     <div class="navbar-end">
@@ -39,12 +39,17 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      isActive: false
+      isActive: false,
+      animated: false
     }
   },
   methods: {
     toggleMenu: function () {
       this.isActive = !this.isActive;
+    },
+    animate: function() {
+      this.animated = true;
+      setTimeout(()=> { this.animated = false }, 1000);
     }
   }
 }

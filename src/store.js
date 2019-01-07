@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-Vue.use(axios)
+Vue.use(VueAxios, axios)
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -35,7 +36,7 @@ const store = new Vuex.Store({
 
       axios.get(uri).then((response) => {
         commit('SET_PROJECTS', response.data);
-      }).finally(commit('IS_LOADING', false));
+      }).finally(() => {commit('IS_LOADING', false)});
     },
     setPosts ({ commit, state }) {
       let uri = `${state.baseUrl}posts?per_page=100`;
@@ -44,7 +45,7 @@ const store = new Vuex.Store({
 
       axios.get(uri).then((response) => {
         commit('SET_POSTS', response.data);
-      }).finally(commit('IS_LOADING', false));
+      }).finally(() => {commit('IS_LOADING', false)});
     }
   }
 })

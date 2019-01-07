@@ -78,5 +78,6 @@ $dimensions: 100 150 200 300 400 500;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
+@import "~animate.css";
 @import "~buefy/src/scss/buefy";
 </style>
